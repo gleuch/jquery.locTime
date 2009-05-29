@@ -1,0 +1,124 @@
+jQuery.loctime
+
+------------------------------------------------------------------------------------------------------
+
+jQuery plugin for adaptive localized date and time messages
+
+Code inspired from jQuery.Timeago() by Ryan McGeary (ryanonjavascript -[at]- mcgeary [*dot*] org)
+
+
+Released by Greg Leuch <http://gleuch.com>, originally for Magma <http://hotlikemagma.com>.
+
+------------------------------------------------------------------------------------------------------
+
+Easy to use:
+
+  1. Add timestamp="-timestamp-" where "-timestamp-" is the iso8601 version of the date
+  2. Add rel="mode" to links, where "mode" is either: ago, date, time, datetime
+  3. Add the initalizer and callback function(s):
+      $(document).ready(
+        // Initializer
+        $('.loctime').loctime({--additional settings--});
+      });
+
+  4. Start clicking away.
+
+
+******************************************************************************************************
+NOTE: Currently requires jquery.JSON plugin to allow for advanced localized settings!
+(From http://code.google.com/p/jquery-json/downloads/list or use jquery.JSON.js)
+******************************************************************************************************
+
+------------------------------------------------------------------------------------------------------
+
+Modes:
+
+  * ago (default)
+    - Based on the jquery.timeago plugin by Ryan McGeary, this mode will humanize time.
+    - Examples include: 
+      - 'about a minute ago'
+      - '3 days ago'
+  * date
+    - Attempt to humanize the date relative to today.
+    - Will output 'Yesterday', 'Today', 'Tomorrow', or verbose date (e.g. 'Friday March 13 1953')
+    - Options allow for:
+        - full or abbreviated names (settings.allowAbbrevs]
+        - day name [settings.allowDayName]
+        - display year (unless year does not match current year) [settings.allowYear]
+  * time
+    - Output time in 00:00 am format
+    - Options allow for:
+        - 12 or 24 hour display [settings.allow24Hour]
+  * datetime
+    - datetime combines both the date and time modes together to output date and time
+    
+
+
+------------------------------------------------------------------------------------------------------
+
+Code Example:
+
+  HTML
+  
+    Time ago: <span class="loctime" rel="ago" timestamp="2009-05-27T20:46:00Z"></span><br />
+    Date: <span class="loctime" rel="date" timestamp="2009-05-26T12:17:00Z"></span><br />
+    Date: <span class="loctime" rel="date" timestamp="2009-04-01T08:23:00Z"></span><br />
+    Time: <span class="loctime" rel="time" timestamp="2009-05-07T16:36:00Z"></span><br />
+    Date & Time: <span class="loctime" rel="datetime" timestamp="2009-05-28T11:44:00Z"></span><br />
+    
+    <script type="text/javascript">
+      $(document).ready(
+        // Initializer
+        $('.loctime').loctime();
+      });
+    </script>
+
+
+  Output (assuming current time is 05/27/2009 9:30pm)
+
+    Time ago: about 1 hour ago
+    Date: Yesterday
+    Date: April 27
+    Time: 4:36pm
+    Date & Time: Today at 11:44am
+
+
+
+
+  Extending Settings
+    (Example: Allow abbreviations and update time period strings.)
+
+    $(document).ready(
+      $('.loctime').loctime({
+
+        allowAbbrevs : true,
+        strings : {
+         dates : {
+          periodsAbbrev : {
+            am : 'A',
+            pm : 'P'
+          }
+         }
+        }
+
+      });
+    });  
+
+
+------------------------------------------------------------------------------------------------------
+
+Tested and works in the following browsers:
+  - Firefox 2.*, 3.*
+
+
+
+Upcoming Features
+
+  - Use sprintf type formatting for date and time
+
+------------------------------------------------------------------------------------------------------
+
+
+Changelog
+
+  - n/a
