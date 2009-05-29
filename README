@@ -105,6 +105,30 @@ Code Example:
     });  
 
 
+
+Example Rails helper to simplify the HTML process:
+
+  Add into app/helpers/application_helper.rb:
+
+    def loctime? time, klass=false
+      klass = 'ago' unless %w(ago date time datetime).include?(klass)
+      "<span class='loctime #{klass}' rel='#{klass}' timestamp='#{time.iso8601}'>#{time}</span>"
+    end
+
+
+  Using within a view:
+
+    - Calling with default 'ago' mode:
+      <%= loctime?(item.created_at) %>
+    - With 'date' mode:
+      <%= loctime?(item.created_at, 'date') %>
+    - With 'time' mode:
+      <%= loctime?(item.created_at, 'time') %>
+    - With 'datetime' mode:
+      <%= loctime?(item.created_at, 'datetime') %>
+        
+
+
 ------------------------------------------------------------------------------------------------------
 
 Tested and works in the following browsers:
